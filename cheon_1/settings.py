@@ -146,6 +146,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
     #프로 젝트 폴더에서 static 폴더를 찾아서 전체 프로젝트 에 적용하여 인식한다.
+    #static 이라는 css 정적 파일을 찾기 위해서
 ]
 
 # Default primary key field type
