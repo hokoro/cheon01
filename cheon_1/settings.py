@@ -143,6 +143,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    #프로 젝트 폴더에서 static 폴더를 찾아서 전체 프로젝트 에 적용하여 인식한다.
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
