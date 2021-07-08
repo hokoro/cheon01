@@ -3,10 +3,20 @@ from django.shortcuts import render
 
 
 # Create your views here.
+from accountapp.models import HelloWorld
+
+
 def hello_world(request):
     #POST/GET 방식에 대한 분기 문 을 작성
     if request.method == 'POST':
-        return render(request,'accountapp/hello_world.html',context={'text':'POST METHOD'}) #html 파일을 가져오고 싶을떄 context
+        temp = request.POST.get('input') #input 으로 입력 한 데이터 를 post.get 을 사용해 얻어 온다
+
+        new_data = HelloWorld()
+        new_data.text = temp  #client 로 받아온 data 를 db 모델에 저장한다.
+        new_data.save() #client 로 받은 데이터를 실제 db 에 저장
+
+        return render(request,'accountapp/hello_world.html',context={'new_data': new_data}) #html 파일을 가져오고 싶을떄 context
+        #객체를 실제 context text 에 적용
     else:
         return render(request,'accountapp/hello_world.html',context={'text':'GET METHOD'})
 
