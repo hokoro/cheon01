@@ -5,7 +5,11 @@
 
     <div style="margin: 2rem; text-align: center;"> <!--body 를 제외하고 나머지는 include 처리-->
         <h1>METHOD</h1>
-        <h3>{{text}}</h3> <!-- 단순 변수 출력은  두개이다 -->
+        <h3>{{text}}</h3> <!-- 단순 변수 출력은  중괄호 두개 이다두개이다 -->
 
+    <form action = "/accounts/hello_world/" method = "post">
+        {% csrf_token %}     <!-- 웹 해킹 csrf 예방  post 요청시 필수-->
+        <input type = "submit" class="btn btn-dark rounded-pill px-5">     <!-- post 할 트리거 요청 -->
+    </form> <!--post 요청 -->
     </div>
 {% endblock %}

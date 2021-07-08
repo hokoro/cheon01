@@ -8,7 +8,7 @@ def hello_world(request):
     if request.method == 'POST':
         return render(request,'accountapp/hello_world.html',context={'text':'POST METHOD'}) #html 파일을 가져오고 싶을떄 context
     else:
-        return render(request,'accountapp/hello_world.html',context={'text':'GET'})
+        return render(request,'accountapp/hello_world.html',context={'text':'GET METHOD'})
 
 
     #HttpResponse('Hello World')
