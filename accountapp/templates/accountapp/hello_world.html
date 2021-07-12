@@ -14,6 +14,8 @@
         <input type = "submit" class="btn btn-dark rounded-pill px-5">     <!-- post 할 트리거 요청 -->
 
     </form> <!--post 요청 -->
-    <h3>{{new_data.text}}</h3>
+        {% for data in data_list %} <!--반복문으로 가져오기 -->
+    <h3>{{data.text}}</h3>
+    {% endfor %} <!-- for문의 마침을 꼭 해야함 -->
     </div>
 {% endblock %}

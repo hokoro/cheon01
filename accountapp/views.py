@@ -15,11 +15,16 @@ def hello_world(request):
         new_data.text = temp  #client 로 받아온 data 를 db 모델에 저장한다.
         new_data.save() #client 로 받은 데이터를 실제 db 에 저장
 
-        return render(request,'accountapp/hello_world.html',context={'new_data': new_data}) #html 파일을 가져오고 싶을떄 context
+        data_list = HelloWorld.objects.all() #helloworld 모델의 객체들을 가져온다 all = 모든정보를 빼온다.
+
+
+
+        return render(request,'accountapp/hello_world.html',context={'data_list': data_list}) #html 파일을 가져오고 싶을떄 context
         #객체를 실제 context text 에 적용
     else:
-        return render(request,'accountapp/hello_world.html',context={'text':'GET METHOD'})
-
+        data_list = HelloWorld.objects.all()
+        return render(request,'accountapp/hello_world.html',context={'data_list':data_list})
+        #get 방식으로 해도 모든 리스트 들이 db 에서 가져 올수 있다.
 
     #HttpResponse('Hello World')
 
