@@ -1,9 +1,12 @@
+from django.contrib.auth.forms import UserCreationForm #유저가 생성할떄 필요한 form
+from django.contrib.auth.models import User #기본적으로 생성시 필요한 유저 모델
 from django.http import HttpResponse, HttpResponseRedirect  # HttpResponse 메소드를 사용할려는 라이브러리
 from django.shortcuts import render
 
 
 # Create your views here.
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView #장고 -> view -> generic -> createview 를 가져옴
 
 from accountapp.models import HelloWorld
 
@@ -40,3 +43,10 @@ app 안에 template 만들고 accountapp 폴더를 따로 만드는 이유
 파일만 남겨두면 어디서 가져오는 파일인지 알수가 없다 
 왜냐 하나의 프로젝트에는 여러가지의 앱이 들어가기 때문에 파일에 경로 로 만들어야 어디앱 에 어떤 파일인지 구분할수 있기 때문이다.
 '''
+class AccountCreateView(CreateView):
+    model = User
+    #입력 형식 데이터
+    form_class = UserCreationForm
+    success_url = reverse_lazy('accountapp:hello_world') #접속시 연결하는 url
+    # laze 를 쓰는 이유 : class 에서 값일 불러지는 방식이 함수랑 다르기 때문이다 나중에 값을 되돌려 줄수 있도록
+    template_name = 'accountapp/create.html'
