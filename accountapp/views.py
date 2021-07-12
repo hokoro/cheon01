@@ -23,7 +23,8 @@ def hello_world(request):
         '''
         #redirect 적용
         return HttpResponseRedirect(reverse('accountapp:hello_world'))
-        #역으로 추적해주는
+        #역으로 추적해주는  'accountapp:hello_world' 이렇게 작성 하면 'accountsapp/hello_world hello_world -> accountsapp 으로 역추적을 해준다
+        #간편하게 사용하기 위해
         #'appname : templates 파일'
         #어디로 재연결 할지 내용을 적는다. + 어떤 app 에 어떤 라우트 로 가라고 알려줌
 
