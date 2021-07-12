@@ -1,8 +1,10 @@
-from django.http import HttpResponse #HttpResponse 메소드를 사용할려는 라이브러리 
+from django.http import HttpResponse, HttpResponseRedirect  # HttpResponse 메소드를 사용할려는 라이브러리
 from django.shortcuts import render
 
 
 # Create your views here.
+from django.urls import reverse
+
 from accountapp.models import HelloWorld
 
 
@@ -14,13 +16,17 @@ def hello_world(request):
         new_data = HelloWorld()
         new_data.text = temp  #client 로 받아온 data 를 db 모델에 저장한다.
         new_data.save() #client 로 받은 데이터를 실제 db 에 저장
-
+        '''
         data_list = HelloWorld.objects.all() #helloworld 모델의 객체들을 가져온다 all = 모든정보를 빼온다.
-
-
-
         return render(request,'accountapp/hello_world.html',context={'data_list': data_list}) #html 파일을 가져오고 싶을떄 context
         #객체를 실제 context text 에 적용
+        '''
+        #redirect 적용
+        return HttpResponseRedirect(reverse('accountapp:hello_world'))
+        #역으로 추적해주는
+        #'appname : templates 파일'
+        #어디로 재연결 할지 내용을 적는다. + 어떤 app 에 어떤 라우트 로 가라고 알려줌
+
     else:
         data_list = HelloWorld.objects.all()
         return render(request,'accountapp/hello_world.html',context={'data_list':data_list})
