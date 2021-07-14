@@ -43,10 +43,11 @@ app 안에 template 만들고 accountapp 폴더를 따로 만드는 이유
 파일만 남겨두면 어디서 가져오는 파일인지 알수가 없다 
 왜냐 하나의 프로젝트에는 여러가지의 앱이 들어가기 때문에 파일에 경로 로 만들어야 어디앱 에 어떤 파일인지 구분할수 있기 때문이다.
 '''
-class AccountCreateView(CreateView):
-    model = User
+#class based view
+class AccountCreateView(CreateView): #Account 계정을 createview 로 만든다.
+    model = User #user 생성
     #입력 형식 데이터
-    form_class = UserCreationForm
+    form_class = UserCreationForm #user 형식 생성
     success_url = reverse_lazy('accountapp:hello_world') #접속시 연결하는 url
     # laze 를 쓰는 이유 : class 에서 값일 불러지는 방식이 함수랑 다르기 때문이다 나중에 값을 되돌려 줄수 있도록
     template_name = 'accountapp/create.html'
