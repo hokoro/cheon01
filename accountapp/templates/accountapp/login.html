@@ -6,7 +6,7 @@
             <h4>Login</h4>
         </div>
         <div>
-            <form action = "{% url 'accountapp:login' %}",method = "post">
+            <form action = "{% url 'accountapp:login' %}" method = "post">
                 {% csrf_token %}
                 {{ form }} <!--usercreateform 에 형식이 이미 지정이 되있다 가져와서 쓰기만 하면 된다.. 출력 할때는 토큰 두개 사용용-->
                 <div class = "m-5">

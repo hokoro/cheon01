@@ -12,3 +12,8 @@
 .Influential_footer_button{
     margin-top :2rem;
 }
+
+.mw-500{
+    max-width: 500px;
+    padding: 1rem 1.5rem;
+}
