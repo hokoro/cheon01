@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView #장고 -> view -> generic -> createview 를 가져옴
+from django.views.generic import CreateView, DetailView  # 장고 -> view -> generic -> createview 를 가져옴
 
 from accountapp.models import HelloWorld
 
@@ -51,3 +51,8 @@ class AccountCreateView(CreateView): #Account 계정을 createview 로 만든다
     success_url = reverse_lazy('accountapp:hello_world') #접속시 연결하는 url
     # laze 를 쓰는 이유 : class 에서 값일 불러지는 방식이 함수랑 다르기 때문이다 나중에 값을 되돌려 줄수 있도록
     template_name = 'accountapp/create.html'
+class AccountDetailView(DetailView): #장고에서 제공하는 CBV
+    model = User #장고에서 서버 요청을 보내는 유저를 설정
+    context_object_name = 'target_user' #server에서 찾아야 하는 타깃 유저
+    template_name = 'accountapp/detail.html' #accountapp 에 있는 detail.html 을 보여준다.
+

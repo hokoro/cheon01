@@ -22,7 +22,7 @@
         @font-face {
             font-family: 'NanumSquareR';
             src: local('NanumSquareR'),
-            url("{% static 'fonts/NanumSquareR.otf' %}") format("opentype");
+            url("{% static 'fonts/NanumSquareR.otf' %}") format("opentype");{# local 에 나눔 파일이 없으면 해당 링크로 가서 파일이 있는지 확인 #}
         }
         @font-face {
             font-family: 'NanumSquareEB';
