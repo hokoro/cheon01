@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView, DetailView  # 장고 -> view -> generic -> createview 를 가져옴
+from django.views.generic import CreateView, DetailView, UpdateView  # 장고 -> view -> generic -> createview 를 가져옴
 
 from accountapp.models import HelloWorld
 
@@ -53,6 +53,12 @@ class AccountCreateView(CreateView): #Account 계정을 createview 로 만든다
     template_name = 'accountapp/create.html'
 class AccountDetailView(DetailView): #장고에서 제공하는 CBV
     model = User #장고에서 서버 요청을 보내는 유저를 설정
-    context_object_name = 'target_user' #server에서 찾아야 하는 타깃 유저
-    template_name = 'accountapp/detail.html' #accountapp 에 있는 detail.html 을 보여준다.
+    context_object_name = 'target_user' #server에서 찾아야 하는 타깃 유저 ,html 에서 뽑아낸 값을 접근할것인디
+    template_name = 'accountapp/detail.html' #accountapp 에 있는 detail.html 에서 보여준다
 
+class AccountUpdateView(UpdateView):
+    model = User
+    form_class = UserCreationForm #업데이트 한 정보를 가져올 form class 가져오기
+    context_object_name = 'target_user' #바뀐 정보에 접근 하기 위한 변수
+    success_url = reverse_lazy('accountapp:hello_world') #데이터를 post 해준 hello world 로 연결
+    template_name = 'accountapp/update.html' #보여줄 template_html 이름
