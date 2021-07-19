@@ -6,7 +6,8 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView, DetailView, UpdateView  # 장고 -> view -> generic -> createview 를 가져옴
+from django.views.generic import CreateView, DetailView, UpdateView, \
+    DeleteView  # 장고 -> view -> generic -> createview 를 가져옴
 
 from accountapp.models import HelloWorld
 
@@ -62,3 +63,8 @@ class AccountUpdateView(UpdateView):
     context_object_name = 'target_user' #바뀐 정보에 접근 하기 위한 변수
     success_url = reverse_lazy('accountapp:hello_world') #데이터를 post 해준 hello world 로 연결
     template_name = 'accountapp/update.html' #보여줄 template_html 이름
+class AccountDeleteView(DeleteView):
+    model = User
+    context_object_name = 'target_user' #접근할 유저
+    success_url = reverse_lazy('accountapp:hello_world') #성공하면 연결할 url
+    template_name = 'accountapp/delete.html' #보여질 template name
