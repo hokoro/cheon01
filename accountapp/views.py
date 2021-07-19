@@ -9,6 +9,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView, \
     DeleteView  # 장고 -> view -> generic -> createview 를 가져옴
 
+from accountapp.forms import AccountCreationForm
 from accountapp.models import HelloWorld
 
 
@@ -59,7 +60,7 @@ class AccountDetailView(DetailView): #장고에서 제공하는 CBV
 
 class AccountUpdateView(UpdateView):
     model = User
-    form_class = UserCreationForm #업데이트 한 정보를 가져올 form class 가져오기
+    form_class = AccountCreationForm #업데이트 한 정보를 가져올 form class 가져오기 #id 를 제외한 나머지 form 보여주기
     context_object_name = 'target_user' #바뀐 정보에 접근 하기 위한 변수
     success_url = reverse_lazy('accountapp:hello_world') #데이터를 post 해준 hello world 로 연결
     template_name = 'accountapp/update.html' #보여줄 template_html 이름

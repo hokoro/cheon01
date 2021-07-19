@@ -9,6 +9,7 @@
         <div>
             {{ target_user.date_joined }} {# views 에서 선언한 타킷 유저로 접근 한다 #}
         </div>
+        {% if user == target_user%} {# 유저와 == target 유저 가 같은지 확인 비회원인 상태에서 정보 변경 불가를 위해 #}
         <div>
             <a href = "{% url 'accountapp:update' pk=target_user.pk %}"> {#detail 정보 보기 에서  -> 정보 수정 링크를 만들어주는게 자연스러움#}
                 Update Info
@@ -17,6 +18,7 @@
                 Quit
             </a>
         </div>
+    {% endif %}
     </div>
 
 {% endblock %}
