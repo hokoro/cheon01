@@ -3,10 +3,19 @@
 {% block content %}
     <div class = "text-center mw-500 m-auto">  <!--bootstrap 에서 제공해주는 class-->
         <div class = "m-5"> <!--margin 5-->
-            <h4>{{ target_user.username }}</h4> {# 타킷 유저로 접근 한다 #}
+
+            <h4>{{ target_user.username }}</h4> {# views 에서 선언한 타킷 유저로 접근 한다 #}
         </div>
         <div>
-            {{ target_user.date_joined }} {# #}
+            {{ target_user.date_joined }} {# views 에서 선언한 타킷 유저로 접근 한다 #}
+        </div>
+        <div>
+            <a href = "{% url 'accountapp:update' pk=target_user.pk %}"> {#detail 정보 보기 에서  -> 정보 수정 링크를 만들어주는게 자연스러움#}
+                Update Info
+            </a>
+            <a href = "{% url 'accountapp:delete' pk=target_user.pk %}">
+                Quit
+            </a>
         </div>
     </div>
 
