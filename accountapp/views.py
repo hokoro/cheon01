@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm #유저가 생성할떄 필요한 form
 from django.contrib.auth.models import User #기본적으로 생성시 필요한 유저 모델
-from django.http import HttpResponse, HttpResponseRedirect  # HttpResponse 메소드를 사용할려는 라이브러리
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden  # HttpResponse 메소드를 사용할려는 라이브러리
 from django.shortcuts import render
 
 
@@ -61,6 +61,10 @@ class AccountDetailView(DetailView): #장고에서 제공하는 CBV
     context_object_name = 'target_user' #server에서 찾아야 하는 타깃 유저 ,html 에서 뽑아낸 값을 접근할것인디
     template_name = 'accountapp/detail.html' #accountapp 에 있는 detail.html 에서 보여준다
 
+
+
+
+
 class AccountUpdateView(UpdateView):
     model = User
     form_class = AccountCreationForm #업데이트 한 정보를 가져올 form class 가져오기 #id 를 제외한 나머지 form 보여주기
@@ -70,15 +74,15 @@ class AccountUpdateView(UpdateView):
 
     #class method 를 통한 회원 정보 접근
     def get(self,request,*args,**kwargs):
-        if request.user.is_authenticated: #로그인이 되있다면
+        if request.user.is_authenticated and self.get_object() == request.user: #로그인이 되있다면 get_object() = target object 를 찾는다 key 값을 가지고 있는
             return super().get(request,*args,**kwargs) #get 방식 핵심 알고리즘 인데
         else:
-            return HttpResponseRedirect(reverse('accountapp:login')) #로그인 안되있다면
+            return HttpResponseForbidden() #로그인 안되있다면 접근 금지 경고창 띄위기 :httpResponeforbidden()
     def post(self,request,*args,**kwargs):
-        if request.user.is_authenticated: #로그인이 되있다면
+        if request.user.is_authenticated and self.get_object() == request.user: #로그인이 되있다면
             return super().post(request,*args,**kwargs) #post 방식 핵심 알고리즘 인데
         else:
-            return HttpResponseRedirect(reverse('accountapp:login')) #로그인 안되있다면
+            return HttpResponseForbidden() #로그인 안되있다면 접근 금지 경고창 띄위기 :httpResponeforbidden()
 class AccountDeleteView(DeleteView):
     model = User
     context_object_name = 'target_user' #접근할 유저
@@ -87,13 +91,13 @@ class AccountDeleteView(DeleteView):
 
     # class method 를 통한 회원 정보 접근
     def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated:  # 로그인이 되있다면
+        if request.user.is_authenticated and self.get_object() == request.user:  # 로그인이 되있다면
             return super().get(request, *args, **kwargs)  # get 방식 핵심 알고리즘 인데
         else:
-            return HttpResponseRedirect(reverse('accountapp:login'))  # 로그인 안되있다면
+            return HttpResponseForbidden() #로그인 안되있다면 접근 금지 경고창 띄위기 :httpResponeforbidden()
 
     def post(self, request, *args, **kwargs):
-        if request.user.is_authenticated:  # 로그인이 되있다면
+        if request.user.is_authenticated and self.get_object() == request.user:  # 로그인이 되있다면
             return super().post(request, *args, **kwargs)  # post 방식 핵심 알고리즘 인데
         else:
-            return HttpResponseRedirect(reverse('accountapp:login'))  # 로그인 안되있다면
+            return HttpResponseForbidden() #로그인 안되있다면 접근 금지 경고창 띄위기 :httpResponeforbidden()
