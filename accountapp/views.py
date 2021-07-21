@@ -91,7 +91,7 @@ class AccountDeleteView(DeleteView):
 
     # class method 를 통한 회원 정보 접근
     def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated and self.get_object() == request.user:  # 로그인이 되있다면
+        if request.user.is_authenticated and self.get_object() == request.user:  # 로그인이 되있다면 + key 값이 같은지 확인
             return super().get(request, *args, **kwargs)  # get 방식 핵심 알고리즘 인데
         else:
             return HttpResponseForbidden() #로그인 안되있다면 접근 금지 경고창 띄위기 :httpResponeforbidden()
