@@ -144,13 +144,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static/' #static 관련 url 이 들어왔을떄 경로를 설정한다.
+
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles') #basedir 로 가서 staticfiles 라는 폴더를 정적 루트로 사용한다.
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
     #프로 젝트 폴더에서 static 폴더를 찾아서 전체 프로젝트 에 적용하여 인식한다.
     #static 이라는 css 정적 파일을 찾기 위해서
+
 ]
+
+MEDIA_URL = '/media/' #static 관련 url 이 들어왔을떄 경로를 설정한다.
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'media') #profile app 부터는 이미지를 업로드 받기 때문에 지정해줘야 한다
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
