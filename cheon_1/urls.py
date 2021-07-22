@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-
+#path('url주소/',include('연결시킬 앱에 url 주소 '))
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/',include('accountapp.urls')) #account url 로 들어가면 accountapp 로 이동할수 있게 url을 설정하라
-    #path('url주소/',include('연결시킬 앱에 url 주소 '))
+    path('accounts/',include('accountapp.urls')), #account url 로 들어가면 accountapp 로 이동할수 있게 url을 설정하라
+    path('profile/',include('profileapp.urls')),
 ]

@@ -53,7 +53,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-#연결시킬 앱의 이름
+#연결시킬 앱의 이름 #app 을 만들면 무조건 app 등록
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accountapp',
     'bootstrap4',
+    'profileapp',
 ]
 
 MIDDLEWARE = [
