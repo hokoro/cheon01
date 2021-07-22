@@ -11,6 +11,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, \
     DeleteView  # 장고 -> view -> generic -> createview 를 가져옴
 
+from accountapp.decorators import account_ownership_required
 from accountapp.forms import AccountCreationForm
 from accountapp.models import HelloWorld
 
@@ -64,9 +65,11 @@ class AccountDetailView(DetailView): #장고에서 제공하는 CBV
 
 
 
+has_ownership = [login_required,account_ownership_required]
 
-@method_decorator(login_required,'get') #메소드에서 데코레이터를 적용한다 (적용할 데토레이터를 가져와야 한다,어떤 방식의 메소드 를 접근 할지)
-@method_decorator(login_required, 'post')
+@method_decorator(has_ownership,'get') #메소드에서 데코레이터를 적용한다 (적용할 데토레이터를 가져와야 한다,어떤 방식의 메소드 를 접근 할지)
+@method_decorator(has_ownership,'post') #애초에 클래스 메소드에서 데코레이터를 작동할수 있는 시스템을 만들어야 한다.
+
 class AccountUpdateView(UpdateView):
     model = User
     form_class = AccountCreationForm #업데이트 한 정보를 가져올 form class 가져오기 #id 를 제외한 나머지 form 보여주기
@@ -74,10 +77,11 @@ class AccountUpdateView(UpdateView):
     success_url = reverse_lazy('accountapp:hello_world') #데이터를 post 해준 hello world 로 연결
     template_name = 'accountapp/update.html' #보여줄 template_html 이름
 
+
 #class method 를 통한 회원 정보 접근
 
-@method_decorator(login_required,'get')
-@method_decorator(login_required,'post')
+@method_decorator(has_ownership,'get')
+@method_decorator(has_ownership,'post')
 class AccountDeleteView(DeleteView):
     model = User
     context_object_name = 'target_user' #접근할 유저
