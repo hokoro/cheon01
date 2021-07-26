@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path,include
 #path('url주소/',include('연결시킬 앱에 url 주소 '))
@@ -20,4 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/',include('accountapp.urls')), #account url 로 들어가면 accountapp 로 이동할수 있게 url을 설정하라
     path('profile/',include('profileapp.urls')),
-]
+
+
+] +static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT) #미디어를 요청했을떄 알려줘야 한다. URL 과 ROOT 를

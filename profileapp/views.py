@@ -18,5 +18,9 @@ class ProfileCreateView(CreateView):
     def form_valid(self, form):
         #user 를 특정 해줘야 한다
         form.instance.user = self.request.user #client 에서 받아온 user == request 에서 받아온 유저
+        '''
+        form = profilecreationsform 인데 forms.py 에는 user 에 대한 정보 가 없다 
+        따라서 instance: form 이 생성 될때 만들어진 user 를 request 요청한 user 에 넣어준다.
+        '''
         return super().form_valid(form)
 
