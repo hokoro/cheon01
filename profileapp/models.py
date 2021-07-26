@@ -11,6 +11,7 @@ class Profile(models.Model):
     계정이 삭제되면 프로필도 종속되어 삭제 된다.
     SET_NULL  =  NULL 로 설정한다
     related_name 1ㄷ1 연결시 user 에서 profile 을 불러올떄 user.profile 간단하게 연결고리 매개변수 
+    DB 정보를 가져올떄 한번에 해결할수 있음
     '''
     #image 처리
     image = models.ImageField(upload_to='profile/',null = True)
@@ -31,5 +32,3 @@ class Profile(models.Model):
     maxlength 최대 길이
     null : text 가 없어도 상관 없는지 여부 
     '''
-
-
