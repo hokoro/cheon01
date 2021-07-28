@@ -1,13 +1,17 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse_lazy, reverse
+from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, UpdateView
 
+from profileapp.decorator import profile_ownership_required
 from profileapp.forms import ProfileCreationsForm
 from profileapp.models import Profile
 
-
+@method_decorator(login_required,'get')
+@method_decorator(login_required,'post')
 class ProfileCreateView(CreateView):
     model = Profile #만들었던 model 가져오기
     form_class = ProfileCreationsForm #client 가 넣은 데이터 폼
@@ -27,7 +31,8 @@ class ProfileCreateView(CreateView):
     def get_success_url(self): #계정이 연결되 있는
         return reverse('accountapp:detail',kwargs={'pk':self.object.user.pk})
 
-
+@method_decorator(profile_ownership_required,'get')
+@method_decorator(profile_ownership_required,'post')
 class ProfileUpdateView(UpdateView):
     model = Profile #model 의 profile
     context_object_name = 'target_profile' #업데이트 할 프로필 지정
