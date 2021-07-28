@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 
 from profileapp.forms import ProfileCreationsForm
 from profileapp.models import Profile
@@ -22,5 +22,11 @@ class ProfileCreateView(CreateView):
         form = profilecreationsform 인데 forms.py 에는 user 에 대한 정보 가 없다 
         따라서 instance: form 이 생성 될때 만들어진 user 를 request 요청한 user 에 넣어준다.
         '''
-        return super().form_valid(form)
+        return super().form_valid(form) #검증하는 모든 과정이 실행 되고 나서 이후에 실행 되는 함수 + 우리는 user 만 커스터 마이징 함
 
+class ProfileUpdateView(UpdateView):
+    model = Profile
+    context_object_name = 'target_profile' #업데이트 할 프로필 지정
+    form_class = ProfileCreationsForm
+    success_url =  reverse_lazy('accountapp:hello_world')
+    template_name = 'profileapp/update.html'
