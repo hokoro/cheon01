@@ -55,9 +55,12 @@ class AccountCreateView(CreateView): #Account 계정을 createview 로 만든다
     model = User #user 생성
     #입력 형식 데이터
     form_class = UserCreationForm #user 형식 생성
-    success_url = reverse_lazy('accountapp:hello_world') #접속시 연결하는 url
+    #success_url = reverse_lazy('accountapp:hello_world') #접속시 연결하는 url
     # laze 를 쓰는 이유 : class 에서 값일 불러지는 방식이 함수랑 다르기 때문이다 나중에 값을 되돌려 줄수 있도록
     template_name = 'accountapp/create.html'
+
+    def get_success_url(self):  # 계정이 연결되 있는 url 을 가져오기
+        return reverse('accountapp:detail', kwargs={'pk': self.object.pk}) #여기서는 바로 targetuser 이기 때문에 바로 pk 를 받는다
 class AccountDetailView(DetailView): #장고에서 제공하는 CBV
     model = User #장고에서 서버 요청을 보내는 유저를 설정
     context_object_name = 'target_user' #server에서 찾아야 하는 타깃 유저 ,html 에서 뽑아낸 값을 접근할것인디
@@ -74,9 +77,11 @@ class AccountUpdateView(UpdateView):
     model = User
     form_class = AccountCreationForm #업데이트 한 정보를 가져올 form class 가져오기 #id 를 제외한 나머지 form 보여주기
     context_object_name = 'target_user' #바뀐 정보에 접근 하기 위한 변수
-    success_url = reverse_lazy('accountapp:hello_world') #데이터를 post 해준 hello world 로 연결
+    #success_url = reverse_lazy('accountapp:hello_world') #데이터를 post 해준 hello world 로 연결
     template_name = 'accountapp/update.html' #보여줄 template_html 이름
 
+    def get_success_url(self):  # 계정이 연결되 있는 url 을 가져오기
+        return reverse('accountapp:detail', kwargs={'pk': self.object.pk}) #여기서는 바로 targetuser 이기 때문에 바로 pk 를 받는다
 
 #class method 를 통한 회원 정보 접근
 
