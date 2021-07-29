@@ -7,8 +7,9 @@
             <h2 class = "NNS_B">
                 {{ target_user.profile.nickname }}
                 {% if target_user == user %} {# user 랑 target 유저가 같은지 확인 #}
-                <a href ="{% url 'profileapp:update' pk=target_user.profile.pk %}"> {# target_user = accountsapp 에 target_user 고 거기서 profile 은 model 에 related_name 연결 이름 거기에 .pk 를 가져와라  #}
-                    Edit
+                <a href ="{% url 'profileapp:update' pk=target_user.profile.pk %}"
+                class = "material-icons round_button"> {# target_user = accountsapp 에 target_user 고 거기서 profile 은 model 에 related_name 연결 이름 거기에 .pk 를 가져와라  #}
+                  edit
                 </a>
                 {% endif %}
             </h2> {# views 에서 선언한 타킷 유저로 접근 한다 #}
