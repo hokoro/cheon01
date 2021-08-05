@@ -288,7 +288,7 @@ magicGrid.listen(); /*호출하고 나서 사용*/
 
 var masonrys = document.getElementsByTagName("img")
 
-for (let i = 0; masonrys.length;i++){
+for (let i = 0; i< masonrys.length;i++){
   masonrys[i].addEventListener('load',function() /*어떤 이벤트 가 발생할때 함수가 실행 하는가 = 'load' 를 가져 올떄 */
   {
     magicGrid.positionItems(); /*각각의 이미지가 load 될떄 마다 수동으로 재배치를 하고 싶을때*/
