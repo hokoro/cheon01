@@ -1,11 +1,11 @@
         <div class="text-center my-5">
             {% if page_obj.has_previous %}
-                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-secondary rounded-pill">
+                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-secondary rounded-pill"> {# ?:get 방식으로 데이터를 넘기는 방식  #}
                 {{ page_obj.previous_page_number }}
                 </a>
 
             {% endif %}
-            <a href="#" class="btn btn-dark rounded-pill"> {# # 넣으면 다른 페이지로 안가고 현재 페이지로 가는걸 설정 #}
+            <a href="#" class="btn btn-dark rounded-pill"> {# # 넣으면 다른 페이지로 안가고 현재 페이지(id)로 가는걸 설정#id 가 있으면 id 가있는 주소로 감 #}
                 {{ page_obj.number }}
             </a>
 
