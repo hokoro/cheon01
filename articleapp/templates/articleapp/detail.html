@@ -1,17 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class = "container">     {# container = bootstrap class #}
-    <div>
+<div class = "container text-center">     {# container = bootstrap class text-center 중앙정렬 #}
+    <div class="my-5"> {# y축 마진 확보 #}
         {# 게시글 제목 글쓴이 작성 일자#}
-        <h1>{{ target_article.title}}</h1>
+        <h1 class="NNS_B">{{ target_article.title}}</h1>
         <h4>{{ target_article.writer.profile.nickname }}</h4>   {# 프로필에 닉네임을 가져와야함 writer 는 게시글의 프로필 닉네임 을 사용하니까 #}
         <p>{{ target_article.created_at }}</p>
     </div>
-    <div>
+
+    <hr>
+    <div class="my-5">
         {# 게시글 내용 게시글 이미지#}
-        <img src = "{{ target_article.image.url }}" alt = "">
+        <img src = "{{ target_article.image.url }}"
+             class="article_image"
+             alt = "" >
+        <div class="article_content my-5">
         {{ target_article.content }}
-        <div>
+        </div>
+            <div>
             <a href="{% url 'articleapp:update' pk=target_article.pk %}" class="btn btn-success rounded-pill px-5">
                 Update
             </a>
