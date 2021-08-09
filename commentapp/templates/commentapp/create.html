@@ -9,6 +9,7 @@
             <form action = "{% url 'commentapp:create' %}" method="post">
                 {% csrf_token %}
                 {% bootstrap_form form %}  <!--usercreateform 에 형식이 이미 지정이 되있다 가져와서 쓰기만 하면 된다.. 출력 할때는 토큰 두개 사용용-->
+                <input type="hidden" name="article_pk" value="{{ target_article.pk }}"> {# 게시글에 대한 article 을 숨겨져 있는 input 이 해당 게시글에 고유 번호를 준다  #}
                 <div class = "m-5">
                     <input type = "submit" class="btn btn-dark rounded-pill px-5">
                 </div>
