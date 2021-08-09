@@ -6,7 +6,7 @@
             <h4>Comment Delete</h4>
         </div>
         <div class>
-            <form action = "{% url 'articleapp:delete' pk=target_article.pk %}" method = "post"> {# 타겟 유저는 객체의 고유값 #}
+            <form action = "{% url 'commentapp:delete' pk=target_comment.pk %}" method = "post"> {# 타겟 유저는 객체의 고유값 #}
                 {% csrf_token %}
                 <div class = "m-5">
                     <input type = "submit" class="btn btn-dark rounded-pill px-5">
