@@ -5,10 +5,12 @@ from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
+from django.views.generic.edit import FormMixin
 
 from articleapp.decorator import article_ownership_required
 from articleapp.forms import ArticleCreationForm
 from articleapp.models import Article
+from commentapp.forms import CommentCreationForm
 
 
 @method_decorator(login_required,'get')
@@ -25,8 +27,9 @@ class ArticleCreateView(CreateView):
     def get_success_url(self): #detail page 가 생겼으므로 수정하고 나서 해당 pk 로 등록된 게시글로 가는 방법
         return reverse('articleapp:detail',kwargs={'pk':self.object.pk})
 
-class ArticleDetailView(DetailView):
+class ArticleDetailView(DetailView,FormMixin):
     model = Article
+    form_class = CommentCreationForm
     context_object_name = 'target_article' #접근 하기 위한 패턴
     template_name = 'articleapp/detail.html'
 
