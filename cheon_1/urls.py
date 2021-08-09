@@ -23,4 +23,5 @@ urlpatterns = [
     path('accounts/',include('accountapp.urls')), #account url 로 들어가면 accountapp 로 이동할수 있게 url을 설정하라
     path('profile/',include('profileapp.urls')),
     path('article/',include('articleapp.urls')),
+    path('comment/',include('commentapp.urls')),
 ] +static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT) #미디어를 요청했을떄 알려줘야 한다. URL 과 ROOT 를
