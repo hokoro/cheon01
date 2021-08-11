@@ -1,14 +1,18 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse
+from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DeleteView
 
 from articleapp.models import Article
+from commentapp.decorators import comment_ownership_required
 from commentapp.forms import CommentCreationForm
 from commentapp.models import Comment
 
-
+@method_decorator(login_required,'get')
+@method_decorator(login_required,'post')
 class CommentCreateView(CreateView):
     model = Comment
     form_class = CommentCreationForm
@@ -20,6 +24,10 @@ class CommentCreateView(CreateView):
         form.instance.writer = self.request.user #로그인 하고 해야함
         form.instance.article_id = self.request.POST.get('article_pk') #POST 형식 안에 저장된 article_pk 를 받아서 게시글 id 로 설정해주는거다
         return super().form_valid(form)
+
+
+@method_decorator(comment_ownership_required,'get') #comment 를 작성한 사람만 삭제가 가능하다
+@method_decorator(comment_ownership_required,'post')
 class CommentDeleteView(DeleteView):
     model = Comment
     context_object_name = 'target_comment'
