@@ -277,7 +277,7 @@ MagicGrid.prototype.listen = function listen () {
 let magicGrid = new MagicGrid({
   container: '.container',
   animate: true,
-  gutter: 30,
+  gutter: 12, /*grid 와 grid 사이의 마진 간격이다 */
   static: true,
   useMin: true
 });
