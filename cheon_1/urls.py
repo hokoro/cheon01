@@ -24,4 +24,5 @@ urlpatterns = [
     path('profile/',include('profileapp.urls')),
     path('article/',include('articleapp.urls')),
     path('comment/',include('commentapp.urls')),
+    path('project/',include('projectapp.urls')),
 ] +static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT) #미디어를 요청했을떄 알려줘야 한다. URL 과 ROOT 를
