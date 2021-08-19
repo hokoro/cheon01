@@ -13,6 +13,7 @@
         </div>
     </div>
     <div>
-    {% include 'snippets/list_fragment.html'%} {# list 조각을 include 로 가져오기  #}
+
+    {% include 'snippets/list_fragment.html' with article_list=object_list%} {# list 조각을 include 로 가져오기 + article_list = object 리스트를 연결   #}
     </div>
 {% endblock %}
