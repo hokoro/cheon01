@@ -10,10 +10,13 @@ from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, \
     DeleteView  # 장고 -> view -> generic -> createview 를 가져옴
+from django.views.generic.list import MultipleObjectMixin
 
 from accountapp.decorators import account_ownership_required
 from accountapp.forms import AccountCreationForm
 from accountapp.models import HelloWorld
+from articleapp.models import Article
+
 
 @login_required(login_url= reverse_lazy('accountapp:login'))
 def hello_world(request):
@@ -61,11 +64,16 @@ class AccountCreateView(CreateView): #Account 계정을 createview 로 만든다
 
     def get_success_url(self):  # 계정이 연결되 있는 url 을 가져오기
         return reverse('accountapp:detail', kwargs={'pk': self.object.pk}) #여기서는 바로 targetuser 이기 때문에 바로 pk 를 받는다
-class AccountDetailView(DetailView): #장고에서 제공하는 CBV
+class AccountDetailView(DetailView,MultipleObjectMixin): #장고에서 제공하는 CBV
     model = User #장고에서 서버 요청을 보내는 유저를 설정
     context_object_name = 'target_user' #server에서 찾아야 하는 타깃 유저 ,html 에서 뽑아낸 값을 접근할것인디
     template_name = 'accountapp/detail.html' #accountapp 에 있는 detail.html 에서 보여준다
 
+    paginate_by = 20
+
+    def get_context_data(self, **kwargs):
+        article_list = Article.objects.filter(writer=self.object) #이 페이지 주인이 작성한 게시글만 보여준다
+        return super().get_context_data(object_list = article_list,**kwargs)
 
 
 has_ownership = [login_required,account_ownership_required]

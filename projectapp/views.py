@@ -28,8 +28,8 @@ class ProjectDetailView(DetailView,MultipleObjectMixin):
 
     #
     def get_context_data(self, **kwargs): #templates 에서 사용할 문맥 데이터를 제공해주는 함수 이다.
-        article_list = Article.objects.filter(project=self.object) #조건에 맞는 게시글들만 filter list 로 저장
-        return super().get_context_data(object_list=article_list,**kwargs) #
+        article_list = Article.objects.filter(project=self.object) #조건에 맞는 게시글들만 filter list 로 저장 templates 에서 사용할(detail.html) 게시글 리스트를 저장
+        return super().get_context_data(object_list=article_list,**kwargs) #templates 에서 사용할 object list 를 반환
 
 class ProjectListView(ListView):
     model = Project
