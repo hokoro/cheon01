@@ -10,6 +10,8 @@ from django.views.generic.list import MultipleObjectMixin #여러개의 오브�
 from articleapp.models import Article
 from projectapp.forms import ProjectCreationForm
 from projectapp.models import Project
+from subscribeapp.models import Subscription
+
 
 @method_decorator(login_required,'get')
 @method_decorator(login_required,'post')
@@ -26,10 +28,18 @@ class ProjectDetailView(DetailView,MultipleObjectMixin):
     template_name = 'projectapp/detail.html'
     paginate_by = 20 #게시판 아래에 연결되있는 게시글 들을 만들어준다
 
-    #
+
     def get_context_data(self, **kwargs): #templates 에서 사용할 문맥 데이터를 제공해주는 함수 이다.
+        #구독여부를 확인하는 게시판
+        user = self.request.user
+        project = self.object #self.object == target_object
+
+        if user.is_authenticated: #로그인 여부 method decorator 를 만들면 login 이 된 사람만 게시판을 볼수 있음
+            subscription = Subscription.objects.filter(user = user,project = project)
+        else:
+            subscription = None
         article_list = Article.objects.filter(project=self.object) #조건에 맞는 게시글들만 filter list 로 저장 templates 에서 사용할(detail.html) 게시글 리스트를 저장
-        return super().get_context_data(object_list=article_list,**kwargs) #templates 에서 사용할 object list 를 반환
+        return super().get_context_data(object_list=article_list,subscription = subscription,**kwargs) #templates 에서 사용할 object list 를 반환
 
 class ProjectListView(ListView):
     model = Project

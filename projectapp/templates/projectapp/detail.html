@@ -12,13 +12,22 @@
             </h5>
         </div>
     </div>
+
+    {% if user.is_authenticated %}
     <div class="text-center">
+        {%if not subscription %}   {# 구독정보가 없다면  #}
         <a href="{% url 'subscribeapp:subscribe' project_pk=target_project.pk %}" class="btn btn-primary rounded-pill px-5">
             Subscribe
         </a>
+            {% else %} {# 구독한 상태라면 #}
+            <a href="{% url 'subscribeapp:subscribe' project_pk=target_project.pk %}" class="btn btn-secondary rounded-pill px-5">
+            UnSubscribe
+             </a>
+            {% endif %}
     </div>
-    <div>
+    {% endif %}
 
+    <div>
     {% include 'snippets/list_fragment.html' with article_list=object_list%} {# list 조각을 include 로 가져오기 + article_list = object 리스트를 연결   #}
     </div>
 {% endblock %}
