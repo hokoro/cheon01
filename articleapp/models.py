@@ -20,3 +20,5 @@ class Article(models.Model):
     content = models.TextField(null = True) #장문의 글을 받을수 있도록 설정하는 것
 
     created_at = models.DateField(auto_now_add= True,null=True) #언제 글을 작성 했는지 정보를 받아온다. 서버 나 클라이언트 에 설정 을 받아오는게 아니라 생성 되면 바로 저장
+
+    like = models.IntegerField(default=0) #게시글이 생성됬을떄 좋아요 개수는 당연히 0 이기 떄문에 default  = 0
