@@ -4,6 +4,14 @@
     <div class="my-5"> {# y축 마진 확보 #}
         {# 게시글 제목 글쓴이 작성 일자#}
         <h1 class="NNS_B">{{ target_article.title}}</h1>
+        <div>
+            <a href="{% url 'likeapp:article_like' article_pk=target_article.pk %}" class="material-icons">
+                favorite
+            </a>
+            <span>
+                {{ target_article.like }}
+            </span>
+        </div>
         <h4>{{ target_article.writer.profile.nickname }}</h4>   {# 프로필에 닉네임을 가져와야함 writer 는 게시글의 프로필 닉네임 을 사용하니까 #}
         <p>{{ target_article.created_at }}</p>
     </div>
