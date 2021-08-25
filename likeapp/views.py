@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -20,6 +21,8 @@ class LikeArticleView(RedirectView):
         likeRecord = LikeRecord.objects.filter(user= user ,article = article) #좋아요 정보 를 filter
 
         if likeRecord.exists(): #게시글에 좋아요 했던 기록이 있으면 그페이지 로 돌아간다
+            #좋아요가 반영 x
+            messages.add_message(request,messages.ERROR,"좋아요는 한번만 가능합니다")
             '''
             likeRecord.delete()
             article.like -= 1
@@ -30,7 +33,8 @@ class LikeArticleView(RedirectView):
             LikeRecord(user=user , article=article).save()
             article.like +=1 #좋아요 1 증가 를 시키고
             article.save()
-
+            #좋아요 반영 메세지
+            messages.add_message(request,messages.SUCCESS,"좋아요가 반영되었습니다")
         return super().get(request, *args, **kwargs)
 
     def get_redirect_url(self, *args, **kwargs):

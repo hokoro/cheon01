@@ -8,7 +8,13 @@
     {% include 'header.html' %} <!-- 장고가 개입하는 부분 -->
     <!--include 는 만들어져 있는 즉 이제는 수정할게 없는 html 내용을 가져와서 넣어주는 케이스 -->
     <hr>
-
+    {% for message in messages %}
+        <div class="text-center">
+            <div class="btn btn-success rounded-pill px-5">
+            {{ message }}
+            </div>
+        </div>
+    {% endfor %}
     {% block content %} <!--블록을 만들어 놓고 내가 이제 수정이 많은 html 문서를 사용할때 정해진 블록안에 내용을 넣어주는 느낌이다-->
     {% endblock %}
 
