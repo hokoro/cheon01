@@ -71,6 +71,10 @@ INSTALLED_APPS = [
     'likeapp',
 ]
 
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR:'danger' #메세지의 에러 tag 를 커스터 마이징 을 할수 있다.
+}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
