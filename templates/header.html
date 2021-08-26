@@ -2,20 +2,22 @@
     <div style="text-align: center">
         <div class = "Influential_header_logo">
         {# margin: 2rem(상하) 0(좌우)#}
+            <a href="{% url 'home' %}">
             <h1>Influential</h1>
+                </a>
         </div>
 
         <div class="Influential_header_button">
-            <span>
+            <span class="mx-2">
                 <a href="{% url 'articleapp:list' %}">
                     Articles
                 </a>
             </span>
-            <span>
+            <span class="mx-2">
                 <a href="{% url 'projectapp:list' %}">Project</a>
             </span>
             {% if user.is_authenticated %}
-                <span>
+                <span class="mx-2">
                 <a href="{% url 'subscribeapp:list' %}">Subscription</a>
                 </span>
 
@@ -23,20 +25,20 @@
 
             {% if not user.is_authenticated %} <!-- user 는 장고 기본 객체 이다 어디서든 불러올수 있음-->
             <!--장고의 분기문-->
-            <span>
+            <span class="mx-2">
                 <a href = "{% url 'accountapp:login' %}" >Login</a>
             </span>
-            <span>
+            <span class="mx-2">
                 <a href = "{% url 'accountapp:create' %}">Sign Up</a>
             </span>
 
             {% else %}
-            <span>
+            <span class="mx-2">
                 <a href = "{% url 'accountapp:logout' %}">
                 Logout
             </a>
             </span>
-                <span>
+                <span class="mx-2">
                     <a href = "{% url 'accountapp:detail' pk=user.pk %}">
                     MyPage
                     </a>

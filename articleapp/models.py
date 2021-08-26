@@ -7,7 +7,7 @@ from projectapp.models import Project
 
 class Article(models.Model):
     writer = models.ForeignKey(User,on_delete=models.SET_NULL,related_name='article',null=True)
-    project = models.ForeignKey(Project, on_delete=models.SET_NULL, related_name='article', null=True) #게시글과 연결고리 역으로 추적하는 방식이다
+    project = models.ForeignKey(Project, on_delete=models.SET_NULL, related_name='article', null=True,blank=True) #게시글과 연결고리 역으로 추적하는 방식이다 blank True 입력을 받지 않아도 진해이 된다.
     #글쓴 사람이 한개 가 아닌 더많은 게시글을 작성해야 되서
     #SET_NULL = 작성자 미상 SET NULL
     #user.article 유저 객체 가 게시글 접근 하기 위해서 related_name = 'article' 로 설정
