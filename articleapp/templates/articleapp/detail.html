@@ -23,7 +23,7 @@
              class="article_image"
              alt = "" >
         <div class="article_content my-5">
-        {{ target_article.content }}
+        {{ target_article.content | safe }} {# 작성한 내용이 실제 저장이 html 태그들이 있는데 태그들을 다뺴고 적용한다. #}
         </div>
         {% if target_article.writer == user %}
             <div>

@@ -1,6 +1,11 @@
 {% extends 'base.html' %}  <!--extends 를 이용하여 basecopy.html 에 저장할 html 문서 -->
 {% load bootstrap4 %}
 {% block content %}
+    {# 게시글 작성 할떄만 사용하기 때문에 해당 html에만 적용  ->  트래핑 낭비를 방지  #}
+<script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+
     <div class = "text-center mw-500 m-auto">  <!--bootstrap 에서 제공해주는 class-->
         <div class = "m-5"> <!--margin 5-->
             <h4>Create Article</h4>
@@ -15,5 +20,8 @@
             </form>
         </div>
     </div>
+    {# medium editor 적용 js 은 아직 안됌 왜? -> medium editor를 선언 하면서 .editable class 를 가진 애들을 editor 변화를 시킨다. #}
+    <script>var editor = new MediumEditor('.editable');</script>
+
 
 {% endblock %}
