@@ -17,6 +17,8 @@ services:
       - cheon_1_network
     secrets:
       - DJANGO_SECRET_KEY
+      - MARIADB_USER
+      - MARIADB_PASSWORD
     volumes:
       - cheon_1_media:/home/cheon01/media/
       - cheon_1_static:/home/cheon01/staticfiles/
@@ -27,6 +29,10 @@ services:
       - cheon_1_network
     volumes:
       - cheon_1_mariadb:/var/lib/mysql
+    secrets:
+      - MARIADB_USER
+      - MARIADB_PASSWORD
+      - MARIADB_ROOT_PASSWORD
     environment:
       MARIADB_DATABASE: django
       MARIADB_USER: django
@@ -43,4 +49,10 @@ volumes:
 
 secrets:
   DJANGO_SECRET_KEY:
+    external: true
+  MARIADB_USER:
+    external: true
+  MARIADB_PASSWORD:
+    external: true
+  MARIADB_ROOT_PASSWORD:
     external: true
