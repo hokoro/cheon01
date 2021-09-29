@@ -7,6 +7,7 @@ services:
     volumes:
       - cheon_1_media:/data/media/
       - cheon_1_static:/data/static/
+      - cheon_1_log:/var/log/nginx/
       - /home/ubuntu/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - 80:80
@@ -46,6 +47,7 @@ volumes:
   cheon_1_media:
   cheon_1_static:
   cheon_1_mariadb:
+  cheon_1_log:
 
 secrets:
   DJANGO_SECRET_KEY:
