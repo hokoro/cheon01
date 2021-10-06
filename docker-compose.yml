@@ -12,6 +12,16 @@ services:
     ports:
       - 80:80
 
+  goaccess:
+    image: allinurl/goaccess:1.5.1
+    volumes:
+    - cheon_1_log:/var/log/nginx/
+    ports:
+    - 7890:7890
+    command: /var/log/nginx/cheon_access.log -o /var/log/nginx/report.html --log-format=COMBINED --real-time-html
+
+
+
   django:
     image: cheon_1_django:5
     networks:
